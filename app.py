@@ -4,56 +4,39 @@ import plotly.express as px
 from PIL import Image
 
 # Fathur
-st.write("# Tugas Kelompok TIM PEMBURU (Andhika, Fathur, Yoseph, dan Edi)")
+st.write("# Tugas Kelompok TIM PEMBURU (andhika, fathur, frendi dan edi)")
 
+st.write("## apa itu BITCOIN ????")
+st.write("""
+Bitcoin, mata uang kripto pionir yang muncul pada tahun 2009, telah merevolusi cara kita memandang dan menggunakan uang di era digital. 
+Diciptakan oleh sosok misterius yang dikenal dengan nama samaran Satoshi Nakamoto, Bitcoin menawarkan sistem transaksi yang terdesentralisasi, 
+memungkinkan pengguna untuk bertransaksi langsung tanpa perantara, dan menantang sistem keuangan tradisional yang telah ada selama berabad-abad.
+""")
 # Judul Aplikasi
-st.title("")
+st.title("sebuah gambaran orang jika investasi bitcoin saat lagi naik")
 
 # File gambar default (pastikan file ini ada di direktori proyek)
-image_path = "orang2.jpg"  # Ganti dengan nama file gambar Anda
+image_path = "hq720.jpg"  # Ganti dengan nama file gambar Anda
 
 try:
     # Membuka gambar menggunakan PIL
     image = Image.open(image_path)
     
     # Menampilkan gambar langsung
-    st.image(image, caption="", use_container_width=True)
+    st.image(image, caption="hehehehe", use_container_width=True)
+    
+
 except FileNotFoundError:
     st.error(f"Tidak dapat menemukan file gambar di path: {image_path}")
     st.write("Pastikan file gambar ada di direktori yang sama dengan file kode ini.")
-
-# Konten Bitcoin
-st.write("## pendahuluan (Apa Itu Bitcoin?)")
-st.write("""
-Bitcoin, mata uang kripto pionir yang muncul pada tahun 2009, telah merevolusi cara kita memandang dan menggunakan uang di era digital. 
-Diciptakan oleh sosok misterius yang dikenal dengan nama samaran Satoshi Nakamoto, Bitcoin menawarkan sistem transaksi yang terdesentralisasi, 
-memungkinkan pengguna untuk bertransaksi langsung tanpa perantara, dan menantang sistem keuangan tradisional yang telah ada selama berabad-abad. dan kita mengambil bitcoin karena kita tertarik terhadap beritanya dimana bitcoin menjadi emas digital
-""")
-
-# Judul Aplikasi
-st.title("Sebuah Gambaran Orang Jika Investasi Bitcoin Saat Lagi Naik")
-
-# File gambar kedua
-image_path_2 = "hq720.jpg"  # Ganti dengan nama file gambar Anda
-
-try:
-    # Membuka gambar menggunakan PIL
-    image = Image.open(image_path_2)
     
-    # Menampilkan gambar langsung
-    st.image(image, caption="Hehehehe", use_container_width=True)
-except FileNotFoundError:
-    st.error(f"Tidak dapat menemukan file gambar di path: {image_path_2}")
-    st.write("Pastikan file gambar ada di direktori yang sama dengan file kode ini.")
-
-# Judul Aplikasi
-st.title("Pergerakan Koin Investasi Bitcoin")
+st.title("Pergerakan Koin Investasi BITCOIN")
 
 st.write("## Deskripsi Data")
 st.write("Data yang digunakan adalah data Bitcoin dari 10 tahun ke belakang (2014-2024).")
 
 # Andhika
-st.write("")
+st.write("## Visualisasi")
 
 # Fungsi untuk membaca data dari file Excel lokal
 def load_data(file_path):
@@ -66,13 +49,13 @@ def load_data(file_path):
 
 # Fungsi untuk menampilkan visualisasi data
 def visualize_data(data):
-    st.title("Visualisasi Interaktif Data Bitcoin")
+    st.title('Visualisasi Interaktif Data Bitcoin')
 
     # Menampilkan data
     st.write(data)
 
     # Plot interaktif
-    st.subheader("Plot Harga Bitcoin")
+    st.subheader('Plot Harga Bitcoin')
 
     if 'Date' in data.columns and 'Close' in data.columns:
         data['Date'] = pd.to_datetime(data['Date'], errors='coerce')
@@ -86,9 +69,9 @@ def visualize_data(data):
         st.error("Dataset harus memiliki kolom 'Date' dan 'Close'.")
 
     # Menambahkan filter interaktif berdasarkan tanggal
-    st.subheader("Filter Data")
-    start_date = st.date_input("Mulai dari tanggal", data['Date'].min())
-    end_date = st.date_input("Sampai tanggal", data['Date'].max())
+    st.subheader('Filter Data')
+    start_date = st.date_input('Mulai dari tanggal', data['Date'].min())
+    end_date = st.date_input('Sampai tanggal', data['Date'].max())
 
     # Filter data berdasarkan tanggal
     start_date = pd.to_datetime(start_date)
@@ -99,7 +82,7 @@ def visualize_data(data):
     st.write(filtered_data)
 
     # Membuat plot dengan data yang difilter
-    st.subheader("Plot Harga Bitcoin (Data Terfilter)")
+    st.subheader('Plot Harga Bitcoin (Data Terfilter)')
     fig_filtered = px.line(filtered_data, x='Date', y='Close', title='Pergerakan Harga Bitcoin (Terfilter)', labels={'Close': 'Harga (USD)'})
     fig_filtered.update_layout(xaxis_title='Tanggal', yaxis_title='Harga (USD)')
     st.plotly_chart(fig_filtered)
@@ -145,39 +128,38 @@ st.write("""
 """)
 
 st.write("## Kesimpulan")
-st.write("""
-Kesimpulan dari perkembangan harga Bitcoin dalam dekade terakhir menunjukkan bahwa cryptocurrency ini mengalami fluktuasi yang signifikan. 
-Dalam periode tersebut, Bitcoin mencapai puncak tertinggi di USD 68.789 pada November 2021, sebelum mengalami penurunan tajam hingga sekitar USD 30.000 pada Juni 2022. 
-Namun, Bitcoin menunjukkan pemulihan yang kuat dan berhasil mencapai all time high (ATH) baru di USD 107.000 pada akhir tahun 2024, 
-yang dipengaruhi oleh faktor-faktor seperti pemilihan presiden AS yang mendukung cryptocurrency. Secara keseluruhan, perjalanan harga Bitcoin mencerminkan dinamika pasar yang kompleks dan ketertarikan yang terus berkembang terhadap aset digital ini.
-""")
+st.write("Kesimpulan dari perkembangan harga Bitcoin dalam dekade terakhir menunjukkan bahwa cryptocurrency ini mengalami fluktuasi yang signifikan. Dalam periode tersebut, Bitcoin mencapai puncak tertinggi di USD 68.789 pada November 2021, sebelum mengalami penurunan tajam hingga sekitar USD 30.000 pada Juni 2022. Namun, Bitcoin menunjukkan pemulihan yang kuat dan berhasil mencapai all time high (ATH) baru di USD 107.000 pada akhir tahun 2024, yang dipengaruhi oleh faktor-faktor seperti pemilihan presiden AS yang mendukung cryptocurrency. Secara keseluruhan, perjalanan harga Bitcoin mencerminkan dinamika pasar yang kompleks dan ketertarikan yang terus berkembang terhadap aset digital ini")
 
 st.write("## Referensi / Daftar Pustaka")
 st.write("https://www.tradingview.com/symbols/BTCUSD/")
 st.write("https://coinmarketcap.com/currencies/bitcoin/")
 
+
 # Judul Aplikasi
-st.title("Gambaran Bitcoin Meroket")
+st.title("GAMBARAN BITCOIN MEROKET")
 
 # Path ke file GIF lokal
 gif_path = "giphy.gif"  # Ganti dengan path ke file GIF Anda
 
 # Menampilkan GIF langsung menggunakan st.image
 try:
+    # Streamlit langsung menampilkan GIF yang bergerak
     st.image(gif_path, caption="$$$$$$", use_container_width=True)
 except FileNotFoundError:
     st.error(f"File tidak ditemukan di path: {gif_path}")
     st.write("Pastikan file GIF tersedia di direktori proyek.")
 
+
 # Judul Aplikasi
 st.title("")
 
 # Path ke file GIF lokal
-gif_path_2 = "pace2.gif"  # Ganti dengan path ke file GIF Anda
+gif_path = "pace2.gif"  # Ganti dengan path ke file GIF Anda
 
 # Menampilkan GIF langsung menggunakan st.image
 try:
-    st.image(gif_path_2, caption="", use_container_width=True)
+    # Streamlit langsung menampilkan GIF yang bergerak
+    st.image(gif_path, caption="", use_container_width=True)
 except FileNotFoundError:
-    st.error(f"File tidak ditemukan di path: {gif_path_2}")
+    st.error(f"File tidak ditemukan di path: {gif_path}")
     st.write("Pastikan file GIF tersedia di direktori proyek.")
