@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import matplotlib.pyplot as plt
-import altair as alt
 
 st.title("pergerakan koin investasi BITCOIN")
 
@@ -18,60 +17,48 @@ st.write("data yang digunakan adalah data bitcoin dari 10 tahun ke belakang")
 
 #andhika
 st.write("## Visualisasi")
-# Load the data
-def load_data():
-    file_path = 'databitcoin.xlsx'  # Replace with your local file path if testing locally
-    data = pd.ExcelFile(file_path)
-    df = data.parse('Sheet1')
-    df_cleaned = df.iloc[:, 0].str.split(';', expand=True)
-    df_cleaned.columns = [
-        "timeOpen", "timeClose", "timeHigh", "timeLow", "name", 
-        "open", "high", "low", "close", "volume", "marketCap", "timestamp"
-    ]
-    # Ensure all columns are strings before processing
-    df_cleaned = df_cleaned.applymap(lambda x: x if isinstance(x, str) else str(x))
-    # Convert relevant columns to numeric and time formats
-    df_cleaned["timeOpen"] = pd.to_datetime(df_cleaned["timeOpen"].str.replace('"', '', regex=False), errors='coerce')
-    df_cleaned["open"] = pd.to_numeric(df_cleaned["open"], errors='coerce')
-    df_cleaned["high"] = pd.to_numeric(df_cleaned["high"], errors='coerce')
-    df_cleaned["low"] = pd.to_numeric(df_cleaned["low"], errors='coerce')
-    df_cleaned["close"] = pd.to_numeric(df_cleaned["close"], errors='coerce')
-    return df_cleaned
+# Membaca data dari file Excel
+file_path = '/mnt/data/databitcoin.xlsx'
+data = pd.read_excel(file_path)
 
-data = load_data()
+# Menampilkan data di Streamlit
+st.title('Visualisasi Interaktif Data Bitcoin')
+st.write(data)
 
-# Streamlit App
-st.title("Interactive Bitcoin Visualization")
+# Membuat plot interaktif
+st.subheader('Plot Harga Bitcoin')
+plt.figure(figsize=(10, 5))
+plt.plot(data['Date'], data['Close'], label='Harga Penutupan')
+plt.xlabel('Tanggal')
+plt.ylabel('Harga (USD)')
+plt.title('Pergerakan Harga Bitcoin')
+plt.legend()
+st.pyplot(plt)
 
-st.sidebar.header("Filter Options")
+# Menambahkan widget interaktif
+st.subheader('Filter Data')
+start_date = st.date_input('Mulai dari tanggal', data['Date'].min())
+end_date = st.date_input('Sampai tanggal', data['Date'].max())
 
-# Date range filter
-date_range = st.sidebar.date_input(
-    "Select Date Range",
-    [data["timeOpen"].min(), data["timeOpen"].max()],
-    min_value=data["timeOpen"].min(),
-    max_value=data["timeOpen"].max()
-)
+# Filter data berdasarkan tanggal
+filtered_data = data[(data['Date'] >= start_date) & (data['Date'] <= end_date)]
 
-# Filter data based on date range
-filtered_data = data[(data["timeOpen"] >= pd.Timestamp(date_range[0])) & (data["timeOpen"] <= pd.Timestamp(date_range[1]))]
+# Menampilkan data yang difilter
+st.write(filtered_data)
 
-# Display filtered data
-st.write("### Filtered Data", filtered_data)
+# Membuat plot dengan data yang difilter
+st.subheader('Plot Harga Bitcoin (Data Terfilter)')
+plt.figure(figsize=(10, 5))
+plt.plot(filtered_data['Date'], filtered_data['Close'], label='Harga Penutupan')
+plt.xlabel('Tanggal')
+plt.ylabel('Harga (USD)')
+plt.title('Pergerakan Harga Bitcoin (Terfilter)')
+plt.legend()
+st.pyplot(plt)
 
-# Plotting
-chart = alt.Chart(filtered_data).mark_line().encode(
-    x='timeOpen:T',
-    y=alt.Y('close:Q', title='Closing Price'),
-    tooltip=['timeOpen:T', 'close:Q']
-).properties(
-    title="Bitcoin Closing Prices Over Time",
-    width=800,
-    height=400
-)
-
-st.altair_chart(chart, use_container_width=True)
-
+# Menjalankan aplikasi Streamlit
+if __name__ == '__main__':
+    st.run()
 st.write("Gunakan juga elemen-elemen interaktif `streamlit`.")
 
 st.write("## Analisis")
