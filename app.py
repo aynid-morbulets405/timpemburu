@@ -1,81 +1,183 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-import matplotlib.pyplot as plt
+from PIL import Image
 
-st.title("pergerakan koin investasi BITCOIN")
+# Fathur
+st.write("# Tugas Kelompok TIM PEMBURU (Andhika, Fathur, Yoseph, dan Edi)")
 
+# Judul Aplikasi
+st.title("")
 
-#fathur
-st.write("# Tugas Kelompok Tim Pemburu")
+# File gambar default (pastikan file ini ada di direktori proyek)
+image_path = "orang2.jpg"  # Ganti dengan nama file gambar Anda
 
-st.write("## Pendahuluan")
-st.write("Bitcoin, mata uang kripto pionir yang muncul pada tahun 2009, telah merevolusi cara kita memandang dan menggunakan uang di era digital. Diciptakan oleh sosok misterius yang dikenal dengan nama samaran Satoshi Nakamoto, Bitcoin menawarkan sistem transaksi yang terdesentralisasi, memungkinkan pengguna untuk bertransaksi langsung tanpa perantara, dan menantang sistem keuangan tradisional yang telah ada selama berabad-abad.")
+try:
+    # Membuka gambar menggunakan PIL
+    image = Image.open(image_path)
+    
+    # Menampilkan gambar langsung
+    st.image(image, caption="", use_container_width=True)
+except FileNotFoundError:
+    st.error(f"Tidak dapat menemukan file gambar di path: {image_path}")
+    st.write("Pastikan file gambar ada di direktori yang sama dengan file kode ini.")
+
+# Konten Bitcoin
+st.write("## pendahuluan (Apa Itu Bitcoin?)")
+st.write("""
+Bitcoin, mata uang kripto pionir yang muncul pada tahun 2009, telah merevolusi cara kita memandang dan menggunakan uang di era digital. 
+Diciptakan oleh sosok misterius yang dikenal dengan nama samaran Satoshi Nakamoto, Bitcoin menawarkan sistem transaksi yang terdesentralisasi, 
+memungkinkan pengguna untuk bertransaksi langsung tanpa perantara, dan menantang sistem keuangan tradisional yang telah ada selama berabad-abad. dan kita mengambil bitcoin karena kita tertarik terhadap beritanya dimana bitcoin menjadi emas digital
+""")
+
+# Judul Aplikasi
+st.title("Sebuah Gambaran Orang Jika Investasi Bitcoin Saat Lagi Naik")
+
+# File gambar kedua
+image_path_2 = "hq720.jpg"  # Ganti dengan nama file gambar Anda
+
+try:
+    # Membuka gambar menggunakan PIL
+    image = Image.open(image_path_2)
+    
+    # Menampilkan gambar langsung
+    st.image(image, caption="Hehehehe", use_container_width=True)
+except FileNotFoundError:
+    st.error(f"Tidak dapat menemukan file gambar di path: {image_path_2}")
+    st.write("Pastikan file gambar ada di direktori yang sama dengan file kode ini.")
+
+# Judul Aplikasi
+st.title("Pergerakan Koin Investasi Bitcoin")
 
 st.write("## Deskripsi Data")
-st.write("data yang digunakan adalah data bitcoin dari 10 tahun ke belakang")
+st.write("Data yang digunakan adalah data Bitcoin dari 10 tahun ke belakang (2014-2024).")
 
-#andhika
-st.write("## Visualisasi")
-# Membaca data dari file Excel
-file_path = '/mnt/data/databitcoin.xlsx'
-data = pd.read_excel(file_path)
+# Andhika
+st.write("")
 
-# Menampilkan data di Streamlit
-st.title('Visualisasi Interaktif Data Bitcoin')
-st.write(data)
+# Fungsi untuk membaca data dari file Excel lokal
+def load_data(file_path):
+    try:
+        data = pd.read_excel(file_path)
+        return data
+    except Exception as e:
+        st.error(f"Gagal membaca file Excel: {e}")
+        return None
 
-# Membuat plot interaktif
-st.subheader('Plot Harga Bitcoin')
-plt.figure(figsize=(10, 5))
-plt.plot(data['Date'], data['Close'], label='Harga Penutupan')
-plt.xlabel('Tanggal')
-plt.ylabel('Harga (USD)')
-plt.title('Pergerakan Harga Bitcoin')
-plt.legend()
-st.pyplot(plt)
+# Fungsi untuk menampilkan visualisasi data
+def visualize_data(data):
+    st.title("Visualisasi Interaktif Data Bitcoin")
 
-# Menambahkan widget interaktif
-st.subheader('Filter Data')
-start_date = st.date_input('Mulai dari tanggal', data['Date'].min())
-end_date = st.date_input('Sampai tanggal', data['Date'].max())
+    # Menampilkan data
+    st.write(data)
 
-# Filter data berdasarkan tanggal
-filtered_data = data[(data['Date'] >= start_date) & (data['Date'] <= end_date)]
+    # Plot interaktif
+    st.subheader("Plot Harga Bitcoin")
 
-# Menampilkan data yang difilter
-st.write(filtered_data)
+    if 'Date' in data.columns and 'Close' in data.columns:
+        data['Date'] = pd.to_datetime(data['Date'], errors='coerce')
+        data = data.dropna(subset=['Date', 'Close'])
 
-# Membuat plot dengan data yang difilter
-st.subheader('Plot Harga Bitcoin (Data Terfilter)')
-plt.figure(figsize=(10, 5))
-plt.plot(filtered_data['Date'], filtered_data['Close'], label='Harga Penutupan')
-plt.xlabel('Tanggal')
-plt.ylabel('Harga (USD)')
-plt.title('Pergerakan Harga Bitcoin (Terfilter)')
-plt.legend()
-st.pyplot(plt)
+        # Membuat plot dengan Plotly
+        fig = px.line(data, x='Date', y='Close', title='Pergerakan Harga Bitcoin', labels={'Close': 'Harga (USD)'})
+        fig.update_layout(xaxis_title='Tanggal', yaxis_title='Harga (USD)')
+        st.plotly_chart(fig)
+    else:
+        st.error("Dataset harus memiliki kolom 'Date' dan 'Close'.")
 
-# Menjalankan aplikasi Streamlit
+    # Menambahkan filter interaktif berdasarkan tanggal
+    st.subheader("Filter Data")
+    start_date = st.date_input("Mulai dari tanggal", data['Date'].min())
+    end_date = st.date_input("Sampai tanggal", data['Date'].max())
+
+    # Filter data berdasarkan tanggal
+    start_date = pd.to_datetime(start_date)
+    end_date = pd.to_datetime(end_date)
+    filtered_data = data[(data['Date'] >= start_date) & (data['Date'] <= end_date)]
+
+    # Menampilkan data yang difilter
+    st.write(filtered_data)
+
+    # Membuat plot dengan data yang difilter
+    st.subheader("Plot Harga Bitcoin (Data Terfilter)")
+    fig_filtered = px.line(filtered_data, x='Date', y='Close', title='Pergerakan Harga Bitcoin (Terfilter)', labels={'Close': 'Harga (USD)'})
+    fig_filtered.update_layout(xaxis_title='Tanggal', yaxis_title='Harga (USD)')
+    st.plotly_chart(fig_filtered)
+
+# Fungsi utama untuk menjalankan aplikasi
+def main():
+    st.title("Visualisasi Data Bitcoin")
+
+    # Jalur file Excel lokal (sesuaikan dengan nama dan lokasi file Anda)
+    file_path = "databitcoin.xlsx"  # Ganti dengan path file Excel Anda
+
+    # Memuat data dari file Excel lokal
+    data = load_data(file_path)
+    
+    if data is not None:
+        st.write(data.head())
+        visualize_data(data)
+    else:
+        st.error("Gagal memuat data. Pastikan file Excel tersedia di direktori yang sama.")
+
 if __name__ == '__main__':
-    st.run()
-st.write("Gunakan juga elemen-elemen interaktif `streamlit`.")
+    main()
 
+# Frendi
 st.write("## Analisis")
-st.write("Dalam 10 tahun terakhir, harga Bitcoin mengalami fluktuasi yang signifikan. Pada November 2021, Bitcoin mencapai puncaknya di sekitar USD 68.789, setara dengan lebih dari Rp 1 miliar. Namun, harga Bitcoin juga mengalami penurunan tajam, terutama pada awal tahun 2022, di mana harga turun drastis hingga mencapai sekitar USD 30.000 pada bulan Juni 2022. tetapi diakhir tahun 2024 bitcoin mencapai ATH all time high nya lagi mencapai USD 107.000")
-("Perkembangan Harga:")
-("2014-2016: Bitcoin mulai mendapatkan perhatian lebih luas, dengan harga yang berkisar antara USD 300 hingga USD 700.")
-("2017: Tahun ini menjadi momen penting ketika Bitcoin mencapai harga hampir USD 20.000 pada bulan Desember, menarik perhatian media dan investor.")
-("2018: Setelah lonjakan harga, Bitcoin mengalami penurunan yang signifikan, dengan harga terendah sekitar USD 3.200 pada bulan Desember.")
-("2019-2020: Perlahan-lahan, harga mulai pulih, dan pada akhir 2020, Bitcoin kembali mencapai harga di atas USD 20.000.")
-("2021: Bitcoin mencapai harga tertinggi baru di USD 64.804 pada April 2021, sebelum mengalami volatilitas yang besar.")
-("2022: Setelah mencapai puncak, harga Bitcoin mengalami penurunan yang tajam, dengan beberapa bulan di mana harga berada di bawah USD 20.000.")
-("2023: Memasuki tahun ini, Bitcoin menunjukkan tanda-tanda pemulihan, dengan harga kembali mendekati USD 30.000 pada pertengahan tahun.")
-("2024: Memasuki akhir tahun di 2024 bitcoin mendapatkan sentimen yang positif sehingga dapat mencapai ATH nya sebesar USD 107.000 ini karena faktor terpilih nya presiden US Donald Trump yang pro dengan kripto")
+st.write("""
+Dalam 10 tahun terakhir, harga Bitcoin mengalami fluktuasi yang signifikan. 
+Pada November 2021, Bitcoin mencapai puncaknya di sekitar USD 68.789, setara dengan lebih dari Rp 1 miliar. 
+Namun, harga Bitcoin juga mengalami penurunan tajam, terutama pada awal tahun 2022, di mana harga turun drastis hingga mencapai sekitar USD 30.000 pada bulan Juni 2022. 
+Namun di akhir tahun 2024, Bitcoin mencapai ATH (all time high) baru di USD 107.000.
+""")
 
-#frendi
+st.write("Perkembangan Harga:")
+st.write("""
+- 2014-2016: Bitcoin mulai mendapatkan perhatian lebih luas, dengan harga yang berkisar antara USD 300 hingga USD 700.
+- 2017: Tahun ini menjadi momen penting ketika Bitcoin mencapai harga hampir USD 20.000 pada bulan Desember, menarik perhatian media dan investor.
+- 2018: Setelah lonjakan harga, Bitcoin mengalami penurunan yang signifikan, dengan harga terendah sekitar USD 3.200 pada bulan Desember.
+- 2019-2020: Perlahan-lahan, harga mulai pulih, dan pada akhir 2020, Bitcoin kembali mencapai harga di atas USD 20.000.
+- 2021: Bitcoin mencapai harga tertinggi baru di USD 64.804 pada April 2021, sebelum mengalami volatilitas yang besar.
+- 2022: Setelah mencapai puncak, harga Bitcoin mengalami penurunan yang tajam, dengan beberapa bulan di mana harga berada di bawah USD 20.000.
+- 2023: Memasuki tahun ini, Bitcoin menunjukkan tanda-tanda pemulihan, dengan harga kembali mendekati USD 30.000 pada pertengahan tahun.
+- 2024: Memasuki akhir tahun 2024, Bitcoin mendapatkan sentimen yang positif sehingga dapat mencapai ATH sebesar USD 107.000, ini karena faktor terpilihnya presiden US Donald Trump yang pro dengan kripto.
+""")
+
 st.write("## Kesimpulan")
-st.write("Tuliskan butir-butir kesimpulan dari analisis.")
+st.write("""
+Kesimpulan dari perkembangan harga Bitcoin dalam dekade terakhir menunjukkan bahwa cryptocurrency ini mengalami fluktuasi yang signifikan. 
+Dalam periode tersebut, Bitcoin mencapai puncak tertinggi di USD 68.789 pada November 2021, sebelum mengalami penurunan tajam hingga sekitar USD 30.000 pada Juni 2022. 
+Namun, Bitcoin menunjukkan pemulihan yang kuat dan berhasil mencapai all time high (ATH) baru di USD 107.000 pada akhir tahun 2024, 
+yang dipengaruhi oleh faktor-faktor seperti pemilihan presiden AS yang mendukung cryptocurrency. Secara keseluruhan, perjalanan harga Bitcoin mencerminkan dinamika pasar yang kompleks dan ketertarikan yang terus berkembang terhadap aset digital ini.
+""")
 
 st.write("## Referensi / Daftar Pustaka")
-st.write("https://www.tradingview.com/symbols/BTCUSD/.")
+st.write("https://www.tradingview.com/symbols/BTCUSD/")
+st.write("https://coinmarketcap.com/currencies/bitcoin/")
+
+# Judul Aplikasi
+st.title("Gambaran Bitcoin Meroket")
+
+# Path ke file GIF lokal
+gif_path = "giphy.gif"  # Ganti dengan path ke file GIF Anda
+
+# Menampilkan GIF langsung menggunakan st.image
+try:
+    st.image(gif_path, caption="$$$$$$", use_container_width=True)
+except FileNotFoundError:
+    st.error(f"File tidak ditemukan di path: {gif_path}")
+    st.write("Pastikan file GIF tersedia di direktori proyek.")
+
+# Judul Aplikasi
+st.title("")
+
+# Path ke file GIF lokal
+gif_path_2 = "pace2.gif"  # Ganti dengan path ke file GIF Anda
+
+# Menampilkan GIF langsung menggunakan st.image
+try:
+    st.image(gif_path_2, caption="", use_container_width=True)
+except FileNotFoundError:
+    st.error(f"File tidak ditemukan di path: {gif_path_2}")
+    st.write("Pastikan file GIF tersedia di direktori proyek.")
