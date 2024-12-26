@@ -4,16 +4,17 @@ import plotly.express as px
 from PIL import Image
 
 # Fathur
-st.write("# Tugas Kelompok TIM PEMBURU (Andhika, Fathur, Frendi, dan Edi)")
+st.write("# Tugas Kelompok TIM PEMBURU (andhika, fathur, frendi dan edi)")
 
-st.write("## Apa itu Bitcoin ????")
+st.write("## apa itu BITCOIN ????")
 st.write("""
 Bitcoin, mata uang kripto pionir yang muncul pada tahun 2009, telah merevolusi cara kita memandang dan menggunakan uang di era digital. 
 Diciptakan oleh sosok misterius yang dikenal dengan nama samaran Satoshi Nakamoto, Bitcoin menawarkan sistem transaksi yang terdesentralisasi, 
 memungkinkan pengguna untuk bertransaksi langsung tanpa perantara, dan menantang sistem keuangan tradisional yang telah ada selama berabad-abad.
 """)
 # Judul Aplikasi
-st.title("Sebuah gambaran orang jika investasi bitcoin saat lagi naik")
+st.title("sebuah gambaran orang jika investasi bitcoin saat lagi naik")
+
 
 # File gambar default (pastikan file ini ada di direktori proyek)
 image_path = "hq720.jpg"  # Ganti dengan nama file gambar Anda
@@ -23,7 +24,8 @@ try:
     image = Image.open(image_path)
     
     # Menampilkan gambar langsung
-    st.image(image, caption="hehehehe")  # Removed use_container_width=True
+    st.image(image, caption="hehehehe", use_column_width=True)
+    
 
 except FileNotFoundError:
     st.error(f"Tidak dapat menemukan file gambar di path: {image_path}")
@@ -40,7 +42,7 @@ st.write("## Visualisasi")
 # Fungsi untuk membaca data dari file Excel lokal
 def load_data(file_path):
     try:
-        data = pd.read_excel(file_path)
+        data = pd.read_excel(file_path, engine='openpyxl')
         return data
     except Exception as e:
         st.error(f"Gagal membaca file Excel: {e}")
@@ -133,8 +135,9 @@ st.write("## Referensi / Daftar Pustaka")
 st.write("https://www.tradingview.com/symbols/BTCUSD/")
 st.write("https://coinmarketcap.com/currencies/bitcoin/")
 
+
 # Judul Aplikasi
-st.title("Gambaran Bitcoin Meroket")
+st.title("GAMBARAN BITCOIN MEROKET")
 
 # Path ke file GIF lokal
 gif_path = "giphy.gif"  # Ganti dengan path ke file GIF Anda
@@ -142,10 +145,14 @@ gif_path = "giphy.gif"  # Ganti dengan path ke file GIF Anda
 # Menampilkan GIF langsung menggunakan st.image
 try:
     # Streamlit langsung menampilkan GIF yang bergerak
-    st.image(gif_path, caption="$$$$$$")  # Removed use_container_width=True
+    st.image(gif_path, caption="$$$$$$", use_column_width=True)
 except FileNotFoundError:
     st.error(f"File tidak ditemukan di path: {gif_path}")
     st.write("Pastikan file GIF tersedia di direktori proyek.")
+
+
+# Judul Aplikasi
+st.title("")
 
 # Path ke file GIF lokal
 gif_path = "pace2.gif"  # Ganti dengan path ke file GIF Anda
@@ -153,7 +160,7 @@ gif_path = "pace2.gif"  # Ganti dengan path ke file GIF Anda
 # Menampilkan GIF langsung menggunakan st.image
 try:
     # Streamlit langsung menampilkan GIF yang bergerak
-    st.image(gif_path)  # Removed use_container_width=True
+    st.image(gif_path, caption="", use_column_width=True)
 except FileNotFoundError:
     st.error(f"File tidak ditemukan di path: {gif_path}")
     st.write("Pastikan file GIF tersedia di direktori proyek.")
