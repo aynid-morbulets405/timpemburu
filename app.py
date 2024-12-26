@@ -167,33 +167,4 @@ try:
 except FileNotFoundError:
     st.error(f"File tidak ditemukan di path: {gif_path}")
     st.write("Pastikan file GIF tersedia di direktori proyek.")
-<<<<<<< HEAD
-=======
-=======
-#fathur
-st.write("# Tugas Kelompok Tim Pemburu")
 
-st.write("## Pendahuluan")
-st.write("Tuliskan di bagian ini latar belakang data apa yang dipilih, mengapa kelompok memilih data ini, dsb.")
-
-st.write("## Deskripsi Data")
-st.write("Tuliskan di bagian ini deskripsi tentang data yang digunakan.")
-
-#andhika
-st.write("## Visualisasi")
-st.write("Buat visualisasi yang menurut kelompok kalian perlu ditampilkan.")
-st.write("Gunakan juga elemen-elemen interaktif `streamlit`.")
-
-st.write("## Analisis")
-st.write("Buat analisis sederhana dari visualisasi data yang muncul di bagian sebelumnya.")
-
-#frendi
-st.write("## Kesimpulan")
-st.write("Tuliskan butir-butir kesimpulan dari analisis.")
-
-st.write("## Referensi / Daftar Pustaka")
-st.write("Tuliskan di bagian ini referensi yang digunakan dalam proyek kelompok ini, misalnya sumber data, makalah ilmiah, dsb.")
-
-
->>>>>>> 94326c8a26d03355a913b42a98273e97d605437c
->>>>>>> 54e2b11a0c8f901c7e0c188a57b33bc2742f38b3
