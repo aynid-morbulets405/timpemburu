@@ -6,6 +6,20 @@ from PIL import Image
 # Fathur
 st.write("# Tugas Kelompok TIM PEMBURU (andhika, fathur, frendi dan edi)")
 
+# Judul Aplikasi
+st.title("sebuah gambaran orang jika investasi bitcoin saat lagi naik")
+
+
+# File gambar default (pastikan file ini ada di direktori proyek)
+image_path = "orang2.jpg"  # Ganti dengan nama file gambar Anda
+
+try:
+    # Membuka gambar menggunakan PIL
+    image = Image.open(image_path)
+    
+    # Menampilkan gambar langsung
+    st.image(image, caption="", use_column_width=True)
+
 st.write("## apa itu BITCOIN ????")
 st.write("""
 Bitcoin, mata uang kripto pionir yang muncul pada tahun 2009, telah merevolusi cara kita memandang dan menggunakan uang di era digital. 
