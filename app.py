@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 from PIL import Image
-import openpyxl
+
 
 # Fathur
 st.write("# Tugas Kelompok TIM PEMBURU (Andhika, Fathur, Frendi, dan Edi)")
