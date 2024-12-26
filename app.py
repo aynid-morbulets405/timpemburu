@@ -7,6 +7,7 @@ from PIL import Image
 # Fathur
 st.write("# Tugas Kelompok TIM PEMBURU (Andhika, Fathur, Frendi, dan Edi)")
 
+
 # Judul Aplikasi
 st.title("")
 
@@ -57,13 +58,13 @@ st.write("Data yang digunakan adalah data Bitcoin dari 10 tahun ke belakang (201
 # Andhika
 st.write("## Visualisasi")
 
-# Fungsi untuk membaca data dari file Excel lokal
+# Fungsi untuk membaca data dari file CSV lokal
 def load_data(file_path):
     try:
-        data = pd.read_excel(file_path, engine='openpyxl')
+        data = pd.read_csv(file_path)
         return data
     except Exception as e:
-        st.error(f"Gagal membaca file Excel: {e}")
+        st.error(f"Gagal membaca file CSV: {e}")
         return None
 
 # Fungsi untuk menampilkan visualisasi data
@@ -110,17 +111,17 @@ def visualize_data(data):
 def main():
     st.title("Visualisasi Data Bitcoin")
 
-    # Jalur file Excel lokal (sesuaikan dengan nama dan lokasi file Anda)
-    file_path = "databitcoin.csv"  # Ganti dengan path file Excel Anda
+    # Jalur file CSV lokal (sesuaikan dengan nama dan lokasi file Anda)
+    file_path = "databitcoin.csv"  # Ganti dengan path file CSV Anda
 
-    # Memuat data dari file Excel lokal
+    # Memuat data dari file CSV lokal
     data = load_data(file_path)
     
     if data is not None:
         st.write(data.head())
         visualize_data(data)
     else:
-        st.error("Gagal memuat data. Pastikan file Excel tersedia di direktori yang sama.")
+        st.error("Gagal memuat data. Pastikan file CSV tersedia di direktori yang sama.")
 
 if __name__ == '__main__':
     main()
