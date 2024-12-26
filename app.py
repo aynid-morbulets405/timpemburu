@@ -2,19 +2,23 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 from PIL import Image
+import streamlit as st
+
+# Check Streamlit version
+if st.__version__ < "0.65":
+    st.warning("This code requires Streamlit version 0.65 or higher. Please upgrade your Streamlit package.")
 
 # Fathur
-st.write("# Tugas Kelompok TIM PEMBURU (andhika, fathur, frendi dan edi)")
+st.write("# Tugas Kelompok TIM PEMBURU (Andhika, Fathur, Frendi, dan Edi)")
 
-st.write("## apa itu BITCOIN ????")
+st.write("## Apa itu Bitcoin ????")
 st.write("""
 Bitcoin, mata uang kripto pionir yang muncul pada tahun 2009, telah merevolusi cara kita memandang dan menggunakan uang di era digital. 
 Diciptakan oleh sosok misterius yang dikenal dengan nama samaran Satoshi Nakamoto, Bitcoin menawarkan sistem transaksi yang terdesentralisasi, 
 memungkinkan pengguna untuk bertransaksi langsung tanpa perantara, dan menantang sistem keuangan tradisional yang telah ada selama berabad-abad.
 """)
 # Judul Aplikasi
-st.title("sebuah gambaran orang jika investasi bitcoin saat lagi naik")
-
+st.title("Sebuah gambaran orang jika investasi bitcoin saat lagi naik")
 
 # File gambar default (pastikan file ini ada di direktori proyek)
 image_path = "hq720.jpg"  # Ganti dengan nama file gambar Anda
@@ -25,7 +29,6 @@ try:
     
     # Menampilkan gambar langsung
     st.image(image, caption="hehehehe", use_container_width=True)
-    
 
 except FileNotFoundError:
     st.error(f"Tidak dapat menemukan file gambar di path: {image_path}")
@@ -135,9 +138,8 @@ st.write("## Referensi / Daftar Pustaka")
 st.write("https://www.tradingview.com/symbols/BTCUSD/")
 st.write("https://coinmarketcap.com/currencies/bitcoin/")
 
-
 # Judul Aplikasi
-st.title("GAMBARAN BITCOIN MEROKET")
+st.title("Gambaran Bitcoin Meroket")
 
 # Path ke file GIF lokal
 gif_path = "giphy.gif"  # Ganti dengan path ke file GIF Anda
@@ -150,18 +152,13 @@ except FileNotFoundError:
     st.error(f"File tidak ditemukan di path: {gif_path}")
     st.write("Pastikan file GIF tersedia di direktori proyek.")
 
-
-# Judul Aplikasi
-st.title("")
-
 # Path ke file GIF lokal
 gif_path = "pace2.gif"  # Ganti dengan path ke file GIF Anda
 
 # Menampilkan GIF langsung menggunakan st.image
 try:
     # Streamlit langsung menampilkan GIF yang bergerak
-    st.image(gif_path, caption="", use_container_width=True)
+    st.image(gif_path, use_container_width=True)
 except FileNotFoundError:
     st.error(f"File tidak ditemukan di path: {gif_path}")
     st.write("Pastikan file GIF tersedia di direktori proyek.")
-
