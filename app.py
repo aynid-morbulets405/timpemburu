@@ -111,7 +111,7 @@ def main():
     st.title("Visualisasi Data Bitcoin")
 
     # Jalur file Excel lokal (sesuaikan dengan nama dan lokasi file Anda)
-    file_path = "databitcoin.xlsx"  # Ganti dengan path file Excel Anda
+    file_path = "databitcoin.csv"  # Ganti dengan path file Excel Anda
 
     # Memuat data dari file Excel lokal
     data = load_data(file_path)
