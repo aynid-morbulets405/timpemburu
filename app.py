@@ -7,7 +7,7 @@ from PIL import Image
 st.write("# Tugas Kelompok TIM PEMBURU (Andhika, Fathur, Frendi, dan Edi)")
 
 # Judul Aplikasi
-st.title("Sebuah Gambaran Orang Jika Investasi Bitcoin Saat Lagi Naik")
+st.title("")
 
 # File gambar default (pastikan file ini ada di direktori proyek)
 image_path = "orang2.jpg"  # Ganti dengan nama file gambar Anda
@@ -18,6 +18,23 @@ try:
     
     # Menampilkan gambar langsung
     st.image(image, caption="", use_column_width=True)
+
+except FileNotFoundError:
+    st.error(f"Tidak dapat menemukan file gambar di path: {image_path}")
+    st.write("Pastikan file gambar ada di direktori yang sama dengan file kode ini.")
+
+# Judul Aplikasi
+st.title("gambaran orang diwaktu harga coin bitcoin naik")
+
+# File gambar default (pastikan file ini ada di direktori proyek)
+image_path = "hq720.jpg"  # Ganti dengan nama file gambar Anda
+
+try:
+    # Membuka gambar menggunakan PIL
+    image = Image.open(image_path)
+    
+    # Menampilkan gambar langsung
+    st.image(image, caption="hehehehe", use_column_width=True)
 
 except FileNotFoundError:
     st.error(f"Tidak dapat menemukan file gambar di path: {image_path}")
