@@ -4,7 +4,6 @@ import plotly.express as px
 from PIL import Image
 import openpyxl
 
-
 # Fathur
 st.write("# Tugas Kelompok TIM PEMBURU (Andhika, Fathur, Frendi, dan Edi)")
 
@@ -24,7 +23,6 @@ try:
 except FileNotFoundError:
     st.error(f"Tidak dapat menemukan file gambar di path: {image_path}")
     st.write("Pastikan file gambar ada di direktori yang sama dengan file kode ini.")
-
 
 st.write("## Apa itu BITCOIN ????")
 st.write("""
@@ -49,7 +47,6 @@ try:
 except FileNotFoundError:
     st.error(f"Tidak dapat menemukan file gambar di path: {image_path}")
     st.write("Pastikan file gambar ada di direktori yang sama dengan file kode ini.")
-
 
 # Judul Aplikasi
 st.title("Pergerakan Koin Investasi BITCOIN")
@@ -155,7 +152,6 @@ st.write("Kesimpulan dari perkembangan harga Bitcoin dalam dekade terakhir menun
 st.write("## Referensi / Daftar Pustaka")
 st.write("https://www.tradingview.com/symbols/BTCUSD/")
 st.write("https://coinmarketcap.com/currencies/bitcoin/")
-
 
 # Judul Aplikasi
 st.title("GAMBARAN BITCOIN MEROKET")
