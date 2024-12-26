@@ -15,10 +15,7 @@ memungkinkan pengguna untuk bertransaksi langsung tanpa perantara, dan menantang
 # Judul Aplikasi
 st.title("sebuah gambaran orang jika investasi bitcoin saat lagi naik")
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 54e2b11a0c8f901c7e0c188a57b33bc2742f38b3
+
 # File gambar default (pastikan file ini ada di direktori proyek)
 image_path = "hq720.jpg"  # Ganti dengan nama file gambar Anda
 
