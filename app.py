@@ -23,6 +23,14 @@ except FileNotFoundError:
     st.error(f"Tidak dapat menemukan file gambar di path: {image_path}")
     st.write("Pastikan file gambar ada di direktori yang sama dengan file kode ini.")
 
+
+st.write("## Apa itu BITCOIN ????")
+st.write("""
+Bitcoin, mata uang kripto pionir yang muncul pada tahun 2009, telah merevolusi cara kita memandang dan menggunakan uang di era digital. 
+Diciptakan oleh sosok misterius yang dikenal dengan nama samaran Satoshi Nakamoto, Bitcoin menawarkan sistem transaksi yang terdesentralisasi, 
+memungkinkan pengguna untuk bertransaksi langsung tanpa perantara, dan menantang sistem keuangan tradisional yang telah ada selama berabad-abad.
+""")
+
 # Judul Aplikasi
 st.title("gambaran orang diwaktu harga coin bitcoin naik")
 
@@ -40,12 +48,6 @@ except FileNotFoundError:
     st.error(f"Tidak dapat menemukan file gambar di path: {image_path}")
     st.write("Pastikan file gambar ada di direktori yang sama dengan file kode ini.")
 
-st.write("## Apa itu BITCOIN ????")
-st.write("""
-Bitcoin, mata uang kripto pionir yang muncul pada tahun 2009, telah merevolusi cara kita memandang dan menggunakan uang di era digital. 
-Diciptakan oleh sosok misterius yang dikenal dengan nama samaran Satoshi Nakamoto, Bitcoin menawarkan sistem transaksi yang terdesentralisasi, 
-memungkinkan pengguna untuk bertransaksi langsung tanpa perantara, dan menantang sistem keuangan tradisional yang telah ada selama berabad-abad.
-""")
 
 # Judul Aplikasi
 st.title("Pergerakan Koin Investasi BITCOIN")
